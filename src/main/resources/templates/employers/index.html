@@ -10,6 +10,7 @@
 
 <div class="container body-content">
     <h2>Employers</h2>
+    <a th:href></a>
     <ul>
         <li th:each="employer : ${employers}">
             <a th:href="@{'/employers/view/' + ${employer.id}}" th:text="${employer.name}"></a>

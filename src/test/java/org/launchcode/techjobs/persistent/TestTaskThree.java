@@ -7,6 +7,8 @@ import org.launchcode.techjobs.persistent.controllers.HomeController;
 import org.launchcode.techjobs.persistent.models.AbstractEntity;
 import org.launchcode.techjobs.persistent.models.Employer;
 import org.launchcode.techjobs.persistent.models.Job;
+import org.launchcode.techjobs.persistent.models.data.EmployerRepository;
+import org.launchcode.techjobs.persistent.models.data.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
@@ -149,34 +151,34 @@ public class TestTaskThree extends AbstractTest {
     /*
      * Verifies that HomeController.displayAddJobForm calls employerRepository.findAll()
      * */
-//    @Test
-//    public void testHomeControllerFetchesEmployers(@Mocked EmployerRepository employerRepository, @Mocked SkillRepository skillRepository) throws ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
-//        Class homeControllerClass = getClassByName("controllers.HomeController");
-//        HomeController homeController = new HomeController();
-//
-//        Field employerRepositoryField = homeControllerClass.getDeclaredField("employerRepository");
-//        employerRepositoryField.setAccessible(true);
-//        employerRepositoryField.set(homeController, employerRepository);
-//
-//        // not needed for verification, but necessary to make sure calling the controller
-//        // method doesn't throw a NullPointerException
-//        Field skillRepositoryField = null;
-//        try {
-//            skillRepositoryField = homeControllerClass.getDeclaredField("skillRepository");
-//            skillRepositoryField.setAccessible(true);
-//            skillRepositoryField.set(homeController, skillRepository);
-//        } catch (NoSuchFieldException e) {
-//            // do nothing
-//        }
-//
-//        Model model = new ExtendedModelMap();
-//
-//        new Expectations() {{
-//            employerRepository.findAll();
-//        }};
-//
-//        homeController.displayAddJobForm(model);
-//    }
+    @Test
+    public void testHomeControllerFetchesEmployers(@Mocked EmployerRepository employerRepository, @Mocked SkillRepository skillRepository) throws ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
+        Class homeControllerClass = getClassByName("controllers.HomeController");
+        HomeController homeController = new HomeController();
+
+        Field employerRepositoryField = homeControllerClass.getDeclaredField("employerRepository");
+        employerRepositoryField.setAccessible(true);
+        employerRepositoryField.set(homeController, employerRepository);
+
+        // not needed for verification, but necessary to make sure calling the controller
+        // method doesn't throw a NullPointerException
+        Field skillRepositoryField = null;
+        try {
+            skillRepositoryField = homeControllerClass.getDeclaredField("skillRepository");
+            skillRepositoryField.setAccessible(true);
+            skillRepositoryField.set(homeController, skillRepository);
+        } catch (NoSuchFieldException e) {
+            // do nothing
+        }
+
+        Model model = new ExtendedModelMap();
+
+        new Expectations() {{
+            employerRepository.findAll();
+        }};
+
+        homeController.displayAddJobForm(model);
+    }
 
     /*
      * Tests SQL query for task 3
